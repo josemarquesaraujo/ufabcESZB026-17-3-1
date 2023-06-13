@@ -33,12 +33,12 @@ def pisca(tempo, caminho_led):
     sleep(tempo)
     writeLED(filename = 'value', value = '0', path = caminho_led)
     
-#print (" Iniciando o script Python para alterar a gpio " + LED_NUMBER + ".")
-#if len ( sys . argv ) !=2:
-#print (" Numero incorreto de argumentos ")
-#print (" uso : ./ LED .py comando ")
-#print (" onde comando pode ser : setup , on , off , status , ou close ")
-#sys . exit (2)
+print (" Iniciando o script Python para alterar a gpio " + LED_NUMBER + ".")
+if len ( sys . argv ) !=2:
+print (" Numero incorreto de argumentos ")
+print (" uso : ./ LED .py comando ")
+print (" onde comando pode ser : setup , on , off , status , ou close ")
+sys . exit (2)
 
 #if sys . argv [1]== "on":
 #print (" Acendendo o LED ")
