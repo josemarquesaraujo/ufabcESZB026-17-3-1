@@ -6,15 +6,17 @@
 
 import sys
 from time import sleep
-LED_PATH_16 = "/sys / class / gpio / gpio16 /"
-LED_PATH_20 = "/sys / class / gpio / gpio20 /"
-LED_PATH_21 = "/sys / class / gpio / gpio21 /"
 
 SYSFS_DIR = "/ sys / class / gpio /"
 
-LED_NUMBER_16 = "16"
-LED_NUMBER_20 = "20"
-LED_NUMBER_21 = "21"
+LED_PATH_16 = "/sys / class / gpio / gpio16 /" #navega até o subdiretório gpio16.
+LED_PATH_20 = "/sys / class / gpio / gpio20 /" #navega até o subdiretório gpio20.
+LED_PATH_21 = "/sys / class / gpio / gpio21 /" #navega até o subdiretório gpio21.
+
+
+LED_NUMBER_16 = "16" 
+LED_NUMBER_20 = "20" 
+LED_NUMBER_21 = "21" 
 
 def writeLED ( filename , value , path = LED_PATH ):
 " Esta funcao escreve o valor 'value ' no arquivo 'path + filename '"
