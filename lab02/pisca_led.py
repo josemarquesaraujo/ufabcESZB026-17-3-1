@@ -4,8 +4,8 @@
 # Derek Molloy , Exploring Raspberry Pi: Interfacing to the Real World with Embedded Linux ,
 # Wiley 2016 , ISBN 978 -1 -119 -1868 -1 , http :// www. exploringrpi . com /
 
-import sys
-from time import sleep
+import sys #importa todo o pacote sys
+from time import sleep #do pacote time importa sleep
 
 SYSFS_DIR = "/ sys / class / gpio /"
 
