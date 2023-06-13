@@ -14,12 +14,12 @@ LED_PATH_20 = "/sys / class / gpio / gpio20 /" #navega até o subdiretório gpio
 LED_PATH_21 = "/sys / class / gpio / gpio21 /" #navega até o subdiretório gpio21.
 
 
-LED_NUMBER_16 = "16" 
-LED_NUMBER_20 = "20" 
-LED_NUMBER_21 = "21" 
+LED_NUMBER_16 = "16" #led amarelo
+LED_NUMBER_20 = "20" #led vermelho
+LED_NUMBER_21 = "21" #led verde
 
-def writeLED ( filename , value , path = LED_PATH ):
 " Esta funcao escreve o valor 'value ' no arquivo 'path + filename '"
+def writeLED ( filename , value , path ):
 fo = open ( path + filename ,"w")
 fo . write ( value )
 fo . close ()
@@ -32,7 +32,9 @@ def pisca(tempo, caminho_led):
     writeLED (filename = 'value', value = '1', path = caminho_led)
     sleep(tempo)
     writeLED(filename = 'value', value = '0', path = caminho_led)
-    
+
+#verifica o argumento dado no raspiberry
+
 print (" Iniciando o script Python para alterar a gpio " + LED_NUMBER + ".")
 if len ( sys . argv ) !=2:
 print (" Numero incorreto de argumentos ")
