@@ -25,6 +25,8 @@ fo . write ( value )
 fo . close ()
 return
 
+#Até aqui OK#
+
 print (" Iniciando o script Python para alterar a gpio " + LED_NUMBER + ".")
 if len ( sys . argv ) !=2:
 print (" Numero incorreto de argumentos ")
