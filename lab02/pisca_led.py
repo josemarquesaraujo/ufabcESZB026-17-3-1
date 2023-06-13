@@ -21,29 +21,29 @@ print (" Iniciando o script Python para alterar a gpio " + LED_NUMBER + ".")
 if len ( sys . argv ) !=2:
 print (" Numero incorreto de argumentos ")
 print (" uso : ./ LED .py comando ")
-24 print (" onde comando pode ser : setup , on , off , status , ou close ")
-25 sys . exit (2)
-26
-27 if sys . argv [1]== "on":
-28 print (" Acendendo o LED ")
-29 writeLED ( filename =" value ", value ="1")
-30 elif sys . argv [1]== " off ":
-31 print (" Desligando o LED ")
-32 writeLED ( filename =" value ", value ="0")
-33 elif sys . argv [1]== " setup ":
-34 print (" Habilitando a gpio ")
-35 writeLED ( filename =" export ", value = LED_NUMBER , path = SYSFS_DIR )
-36 sleep (0.1)
-37 writeLED ( filename =" direction ", value =" out ")
-38 elif sys . argv [1]== " close ":
-39 print (" Desabilitando a gpio ")
-40 writeLED ( filename =" unexport ", value = LED_NUMBER , path = SYSFS_DIR )
-41 elif sys . argv [1]== " status ":
-42 print (" Pegando o status da gpio ")
-43 fo = open ( LED_PATH + " value ", "r")
-44 print ( fo . read () )
-45 fo . close ()
-46 else :
-47 print (" Comando invalido !")
-48
-49 print (" Fim do script Python .")
+print (" onde comando pode ser : setup , on , off , status , ou close ")
+sys . exit (2)
+
+if sys . argv [1]== "on":
+print (" Acendendo o LED ")
+writeLED ( filename =" value ", value ="1")
+elif sys . argv [1]== " off ":
+print (" Desligando o LED ")
+writeLED ( filename =" value ", value ="0")
+elif sys . argv [1]== " setup ":
+print (" Habilitando a gpio ")
+writeLED ( filename =" export ", value = LED_NUMBER , path = SYSFS_DIR )
+sleep (0.1)
+writeLED ( filename =" direction ", value =" out ")
+elif sys . argv [1]== " close ":
+print (" Desabilitando a gpio ")
+writeLED ( filename =" unexport ", value = LED_NUMBER , path = SYSFS_DIR )
+elif sys . argv [1]== " status ":
+print (" Pegando o status da gpio ")
+fo = open ( LED_PATH + " value ", "r")
+print ( fo . read () )
+fo . close ()
+else :
+print (" Comando invalido !")
+
+print (" Fim do script Python .")
