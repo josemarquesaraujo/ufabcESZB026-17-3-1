@@ -27,10 +27,11 @@ return
 
 #Até aqui OK#
 
-def on_off_led(pausa, led_pth):
-    writeLED (filename = 'value', value = '1', path = led_pth)
-    sleep(pausa)
-    writeLED(filename = 'value', value = '0', path = led_pth)
+#Criamos uma função para acender e apagar os leds
+def pisca(tempo, caminho_led):
+    writeLED (filename = 'value', value = '1', path = caminho_led)
+    sleep(tempo)
+    writeLED(filename = 'value', value = '0', path = caminho_led)
     
 #print (" Iniciando o script Python para alterar a gpio " + LED_NUMBER + ".")
 #if len ( sys . argv ) !=2:
