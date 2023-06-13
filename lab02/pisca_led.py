@@ -1,26 +1,26 @@
 #!/ usr / bin / python3
-2
-3 # script baseado no có digo disponibilizado em:
-4 # Derek Molloy , Exploring Raspberry Pi: Interfacing to the Real World with Embedded Linux ,
-5 # Wiley 2016 , ISBN 978 -1 -119 -1868 -1 , http :// www. exploringrpi . com /
-6
-7 import sys
-8 from time import sleep
-9 LED_PATH = "/sys / class / gpio / gpio16 /"
-10 SYSFS_DIR = "/ sys / class / gpio /"
-11 LED_NUMBER = "16"
-12
-13 def writeLED ( filename , value , path = LED_PATH ):
-14 " Esta funcao escreve o valor 'value ' no arquivo 'path + filename '"
-15 fo = open ( path + filename ,"w")
-16 fo . write ( value )
-17 fo . close ()
-18 return
-19
-20 print (" Iniciando o script Python para alterar a gpio " + LED_NUMBER + ".")
-21 if len ( sys . argv ) !=2:
-22 print (" Numero incorreto de argumentos ")
-23 print (" uso : ./ LED .py comando ")
+
+# script baseado no có digo disponibilizado em:
+# Derek Molloy , Exploring Raspberry Pi: Interfacing to the Real World with Embedded Linux ,
+# Wiley 2016 , ISBN 978 -1 -119 -1868 -1 , http :// www. exploringrpi . com /
+
+import sys
+from time import sleep
+LED_PATH = "/sys / class / gpio / gpio16 /"
+SYSFS_DIR = "/ sys / class / gpio /"
+LED_NUMBER = "16"
+
+def writeLED ( filename , value , path = LED_PATH ):
+" Esta funcao escreve o valor 'value ' no arquivo 'path + filename '"
+fo = open ( path + filename ,"w")
+fo . write ( value )
+fo . close ()
+return
+
+print (" Iniciando o script Python para alterar a gpio " + LED_NUMBER + ".")
+if len ( sys . argv ) !=2:
+print (" Numero incorreto de argumentos ")
+print (" uso : ./ LED .py comando ")
 24 print (" onde comando pode ser : setup , on , off , status , ou close ")
 25 sys . exit (2)
 26
