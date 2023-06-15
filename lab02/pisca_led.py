@@ -42,6 +42,30 @@ print (" uso : ./ LED .py comando ")
 print (" onde comando pode ser : setup , on , off , status , ou close ")
 sys . exit (2)
 
+if sys.argv [1]=="on"
+
+for cont in range (5):
+    writeLED(filename="export", value=LED_NUMBER_16, path=SYSFS_DIR)
+     writeLED (filename="direction", value="out", path=LED_PATH_16)
+    pisca(tempo = 1, caminho_led = LED_PATH_16)
+    writeLED(filename="unexport", value=LED_NUMBER_16, path=SYSFS_DIR)
+
+    writeLED(filename="export", value=LED_NUMBER_20, path=SYSFS_DIR)
+    writeLED (filename="direction", value="out", path=LED_PATH_20)
+    pisca(tempo = 2, caminho_led = LED_PATH_20)
+    writeLED(filename="unexport", value=LED_NUMBER_20, path=SYSFS_DIR)
+
+    writeLED(filename="export", value=LED_NUMBER_21, path=SYSFS_DIR)
+    writeLED (filename="direction", value="out", path=LED_PATH_21)
+    pisca(tempo = 1, caminho_led = LED_PATH_21)
+    writeLED(filename="unexport", value=LED_NUMBER_21, path=SYSFS_DIR)
+
+else: print("Comando invalido!")
+
+print("Fim do script Python.")
+
+
+
 #if sys . argv [1]== "on":
 #print (" Acendendo o LED ")
 #writeLED ( filename =" value ", value ="1")
