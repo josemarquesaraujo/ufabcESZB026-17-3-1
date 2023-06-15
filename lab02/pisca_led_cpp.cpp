@@ -9,8 +9,12 @@
 #include<unistd.h>
 using namespace std;
 
-#define GPIO_NUMBER "16"
-#define GPIO_PATH "/sys/class/gpio/gpio16/"
+#define GPIO_AMARELO "16"
+#define GPIO_VERMELHO "20"
+#define GPIO_VERDE "21"
+#define GPIO_PATH_AMARELO "/sys/class/gpio/gpio16/"
+#define GPIO_PATH_VERMELHO "/sys/class/gpio/gpio20/"
+#define GPIO_PATH_VERDE "/sys/class/gpio/gpio21/"
 #define GPIO_SYSFS "/sys/class/gpio/"
 
 void writeGPIO(string path, string filename, string value){
