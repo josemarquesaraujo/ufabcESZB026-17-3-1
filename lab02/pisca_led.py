@@ -1,4 +1,4 @@
-#!/ usr / bin / python3
+#!/usr/bin/python3
 
 # script baseado no có digo disponibilizado em:
 # Derek Molloy , Exploring Raspberry Pi: Interfacing to the Real World with Embedded Linux ,
@@ -7,11 +7,11 @@
 import sys #importa todo o pacote sys
 from time import sleep #do pacote time importa sleep
 
-SYSFS_DIR = "/ sys / class / gpio /"
+SYSFS_DIR = "/sys/class/gpio/"
 
-LED_PATH_16 = "/sys / class / gpio / gpio16 /" #navega até o subdiretório gpio16.
-LED_PATH_20 = "/sys / class / gpio / gpio20 /" #navega até o subdiretório gpio20.
-LED_PATH_21 = "/sys / class / gpio / gpio21 /" #navega até o subdiretório gpio21.
+LED_PATH_16 = "/sys/class/gpio/gpio16/" #navega até o subdiretório gpio16.
+LED_PATH_20 = "/sys/class/gpio/gpio20/" #navega até o subdiretório gpio20.
+LED_PATH_21 = "/sys/class/gpio/gpio21/" #navega até o subdiretório gpio21.
 
 
 LED_NUMBER_16 = "16" #led amarelo
@@ -19,11 +19,11 @@ LED_NUMBER_20 = "20" #led vermelho
 LED_NUMBER_21 = "21" #led verde
 
 " Esta funcao escreve o valor 'value ' no arquivo 'path + filename '"
-def writeLED ( filename , value , path ):
-fo = open ( path + filename ,"w")
-fo . write ( value )
-fo . close ()
-return
+def writeLED( filename , value , path ):
+	fo = open( path + filename ,"w")
+	fo.write( value )
+	fo.close()
+	return
 
 #Até aqui OK#
 
@@ -35,32 +35,25 @@ def pisca(tempo, caminho_led):
 
 #verifica o argumento dado no raspiberry
 
-print (" Iniciando o script Python para alterar a gpio " + LED_NUMBER + ".")
-if len ( sys . argv ) !=2:
-print (" Numero incorreto de argumentos ")
-print (" uso : ./ LED .py comando ")
-print (" onde comando pode ser : setup , on , off , status , ou close ")
-sys . exit (2)
+print (" Iniciando o script Python para alterar a gpio.")
 
-if sys.argv [1]=="on"
 
 for cont in range (5):
-    writeLED(filename="export", value=LED_NUMBER_16, path=SYSFS_DIR)
-     writeLED (filename="direction", value="out", path=LED_PATH_16)
-    pisca(tempo = 1, caminho_led = LED_PATH_16)
-    writeLED(filename="unexport", value=LED_NUMBER_16, path=SYSFS_DIR)
+	writeLED(filename="export", value=LED_NUMBER_16, path=SYSFS_DIR)
+	writeLED (filename="direction", value="out", path=LED_PATH_16)
+	pisca(tempo = 1, caminho_led = LED_PATH_16)
+	writeLED(filename="unexport", value=LED_NUMBER_16, path=SYSFS_DIR)
 
-    writeLED(filename="export", value=LED_NUMBER_20, path=SYSFS_DIR)
-    writeLED (filename="direction", value="out", path=LED_PATH_20)
-    pisca(tempo = 2, caminho_led = LED_PATH_20)
-    writeLED(filename="unexport", value=LED_NUMBER_20, path=SYSFS_DIR)
+	writeLED(filename="export", value=LED_NUMBER_20, path=SYSFS_DIR)
+	writeLED (filename="direction", value="out", path=LED_PATH_20)
+	pisca(tempo = 2, caminho_led = LED_PATH_20)
+	writeLED(filename="unexport", value=LED_NUMBER_20, path=SYSFS_DIR)
 
-    writeLED(filename="export", value=LED_NUMBER_21, path=SYSFS_DIR)
-    writeLED (filename="direction", value="out", path=LED_PATH_21)
-    pisca(tempo = 1, caminho_led = LED_PATH_21)
-    writeLED(filename="unexport", value=LED_NUMBER_21, path=SYSFS_DIR)
+	writeLED(filename="export", value=LED_NUMBER_21, path=SYSFS_DIR)
+	writeLED (filename="direction", value="out", path=LED_PATH_21)
+	pisca(tempo = 1, caminho_led = LED_PATH_21)
+	writeLED(filename="unexport", value=LED_NUMBER_21, path=SYSFS_DIR)
 
-else: print("Comando invalido!")
 
 print("Fim do script Python.")
 
