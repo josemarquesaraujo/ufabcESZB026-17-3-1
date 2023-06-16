@@ -10,7 +10,7 @@ from time import sleep #do pacote time importa sleep
 SYSFS_DIR = "/sys/class/gpio/"
 
 LED_PATH_AMARELO = "/sys/class/gpio/gpio16/" #navega até o subdiretório gpio16.
-LED_PATH_VEMELHO = "/sys/class/gpio/gpio20/" #navega até o subdiretório gpio20.
+LED_PATH_VERMELHO = "/sys/class/gpio/gpio20/" #navega até o subdiretório gpio20.
 LED_PATH_VERDE = "/sys/class/gpio/gpio21/" #navega até o subdiretório gpio21.
 
 
