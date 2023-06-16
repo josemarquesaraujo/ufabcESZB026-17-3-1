@@ -27,13 +27,7 @@ void writeGPIO(char filename[], char value[]){
 
 int main(int argc, char* argv[]){
    int cont;
-   #  if(argc!=2){                        // o nome do programa eh o argumento 1
-     # printf("Numero incorreto de argumentos\n");
-     # printf(" uso: ./LED_c comando\n");
-     # printf(" onde comando pode ser: setup, on, off, status, ou close\n");
-     # return 2;                        // numero invalido de argumentos
    
-      printf("Iniciando o programa em C para alterar a gpio");
     for (cont=0; cont<=5; cont++){
       printf("Habilitando a gpio\n");
       writeGPIO(GPIO_SYSFS "export", GPIO_VERMELHO);
