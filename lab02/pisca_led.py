@@ -31,7 +31,7 @@ for cont in range (5):
 	sleep(0.1)
 	writeLED (filename="direction", value="out", path=LED_PATH_VERMELHO)
 	writeLED (filename = 'value', value = '1', path = LED_PATH_VERMELHO)
-    	sleep(2)
+	sleep(2)
     	writeLED(filename = 'value', value = '0', path = LED_PATH_VERMELHO)
 	writeLED(filename="unexport", value=LED_NUMBER_VERMELHO, path=SYSFS_DIR)
 
