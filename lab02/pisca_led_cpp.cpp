@@ -29,12 +29,34 @@ void writeGPIO(string path, string filename, string value){
 int main(int argc, char* argv[]){
    string cmd(argv[1]);
    int cont;
-   
-      writeGPIO(string(GPIO_SYSFS), "export", GPIO_NUMBER);
+   for (cont = 0; cont<= 5; cont++){
+      writeGPIO(string(GPIO_SYSFS), "export", GPIO_VERMELHO);
       usleep(100000);
-      writeGPIO(string(GPIO_PATH), "value", "1");
+      writeGPIO(string(GPIO_VERMELHO), "direction", "out");
+      writeGPIO(string(GPIO_VERMELHO), "value", "1");
+      usleep(2000000);   
+      writeGPIO(string(GPIO_PATH_VERMELHO), "value", "0");
+      writeGPIO(string(GPIO_SYSFS), "unexport", GPIO_VERMELHO);
+
+      writeGPIO(string(GPIO_SYSFS), "export", GPIO_VERDE);
       usleep(100000);
-      writeGPIO(string(GPIO_PATH), "direction", "out");
-      writeGPIO(string(GPIO_SYSFS), "unexport", GPIO_NUMBER);
+      writeGPIO(string(GPIO_VERDE), "direction", "out");
+      writeGPIO(string(GPIO_VERDE), "value", "1");
+      usleep(1000000);   
+      writeGPIO(string(GPIO_PATH_VERDE), "value", "0");
+      writeGPIO(string(GPIO_SYSFS), "unexport", GPIO_VERDE);
+      
+      writeGPIO(string(GPIO_SYSFS), "export", GPIO_AMARELO);
+      usleep(100000);
+      writeGPIO(string(GPIO_AMARELO), "direction", "out");
+      writeGPIO(string(GPIO_AMARELO), "value", "1");
+      usleep(2000000);   
+      writeGPIO(string(GPIO_PATH_AMARELO), "value", "0");
+      writeGPIO(string(GPIO_SYSFS), "unexport", GPIO_AMARELO);
+      
+      
    }
+      
+      
+}
    
