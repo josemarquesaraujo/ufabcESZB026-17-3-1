@@ -46,14 +46,14 @@ int main(int argc, char* argv[]){
       writeGPIO(GPIO_SYSFS "export", GPIO_VERDE);
       usleep(100000);                  // aguarda 100ms
       writeGPIO(GPIO4_VERDE "direction", "out");
-      usleep(2000000);
+      usleep(1000000);
       printf("Desabilitando a gpio\n");
       writeGPIO(GPIO_SYSFS "unexport", GPIO_VERDE);
 
        writeGPIO(GPIO_SYSFS "export", GPIO_AMARELO);
       usleep(100000);                  // aguarda 100ms
       writeGPIO(GPIO4_AMARELO "direction", "out");
-      usleep(2000000);
+      usleep(1000000);
       printf("Desabilitando a gpio\n");
       writeGPIO(GPIO_SYSFS "unexport", GPIO_AMARELO);
 
