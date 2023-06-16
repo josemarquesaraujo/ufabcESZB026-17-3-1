@@ -30,16 +30,6 @@ int main(int argc, char* argv[]){
    string cmd(argv[1]);
    int cont;
    
-   if(cmd=="on"){
-      cout << "Acendendo o LED" << endl;
-      writeGPIO(string(GPIO_PATH), "value", "1");
-   }
-   else if (cmd=="off"){
-      cout << "Desligando o LED" << endl;
-      writeGPIO(string(GPIO_PATH), "value", "0");
-   }
-   else if (cmd=="setup"){
-      cout << "Habilitando a gpio" << endl;
       writeGPIO(string(GPIO_SYSFS), "export", GPIO_NUMBER);
       usleep(100000);
       writeGPIO(string(GPIO_PATH), "value", "1");
@@ -47,20 +37,4 @@ int main(int argc, char* argv[]){
       writeGPIO(string(GPIO_PATH), "direction", "out");
       writeGPIO(string(GPIO_SYSFS), "unexport", GPIO_NUMBER);
    }
-   else if (cmd=="close"){
-      cout << "Desabilitando a gpio" << endl;
-      writeGPIO(string(GPIO_SYSFS), "unexport", GPIO_NUMBER);
-   }
-   else if (cmd=="status"){
-      std::fstream fs;
-      fs.open( GPIO_PATH "value", std::fstream::in);
-      string line;
-      while(getline(fs,line)) cout << "O estado do LED eh " << line << endl;
-      fs.close();
-   }
-   else{
-      cout << "Comando invalido!" << endl;
-   }
-   cout << "Fim do programa em C++." << endl;
-   return 0;
-}
+   
