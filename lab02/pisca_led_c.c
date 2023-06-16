@@ -32,7 +32,7 @@ int main(int argc, char* argv[]){
       printf(" onde comando pode ser: setup, on, off, status, ou close\n");
       return 2;                        // numero invalido de argumentos
    }
-   printf("Iniciando o programa em C para alterar a gpio %s.\n",GPIO_NUMBER);
+   printf("Iniciando o programa em C para alterar a gpio");
    if(strcmp(argv[1],"setup")==0){
       printf("Habilitando a gpio\n");
       writeGPIO(GPIO_SYSFS "export", GPIO_NUMBER);
