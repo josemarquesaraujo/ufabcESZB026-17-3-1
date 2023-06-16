@@ -34,13 +34,32 @@ int main(int argc, char* argv[]){
      # return 2;                        // numero invalido de argumentos
    
       printf("Iniciando o programa em C para alterar a gpio");
-    
+    for (cont=0; cont<=5; cont++){
       printf("Habilitando a gpio\n");
-      writeGPIO(GPIO_SYSFS "export", GPIO_NUMBER);
+      writeGPIO(GPIO_SYSFS "export", GPIO_VERMELHO);
       usleep(100000);                  // aguarda 100ms
-      writeGPIO(GPIO4_PATH "direction", "out");
+      writeGPIO(GPIO4_VERMELHO "direction", "out");
+      usleep(2000000);
       printf("Desabilitando a gpio\n");
-      writeGPIO(GPIO_SYSFS "unexport", GPIO_NUMBER);
+      writeGPIO(GPIO_SYSFS "unexport", GPIO_VERMELHO);
+
+      writeGPIO(GPIO_SYSFS "export", GPIO_VERDE);
+      usleep(100000);                  // aguarda 100ms
+      writeGPIO(GPIO4_VERDE "direction", "out");
+      usleep(2000000);
+      printf("Desabilitando a gpio\n");
+      writeGPIO(GPIO_SYSFS "unexport", GPIO_VERDE);
+
+       writeGPIO(GPIO_SYSFS "export", GPIO_AMARELO);
+      usleep(100000);                  // aguarda 100ms
+      writeGPIO(GPIO4_AMARELO "direction", "out");
+      usleep(2000000);
+      printf("Desabilitando a gpio\n");
+      writeGPIO(GPIO_SYSFS "unexport", GPIO_AMARELO);
+
+       
+    }
+      
 }
    
 
