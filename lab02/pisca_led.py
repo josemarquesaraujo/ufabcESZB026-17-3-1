@@ -14,9 +14,9 @@ LED_PATH_VEMELHO = "/sys/class/gpio/gpio20/" #navega até o subdiretório gpio20
 LED_PATH_VERDE = "/sys/class/gpio/gpio21/" #navega até o subdiretório gpio21.
 
 
-LED_AMARELO = "16" #led amarelo
-LED_VERMELHO = "20" #led vermelho
-LED_VERDE = "21" #led verde
+LED_NUMBER_AMARELO = "16" #led amarelo
+LED_NUMBER_VERMELHO = "20" #led vermelho
+LED_NUMBER_VERDE = "21" #led verde
 
 " Esta funcao escreve o valor 'value ' no arquivo 'path + filename '"
 def writeLED( filename , value , path ):
