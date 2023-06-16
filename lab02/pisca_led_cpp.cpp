@@ -27,15 +27,9 @@ void writeGPIO(string path, string filename, string value){
 }
 
 int main(int argc, char* argv[]){
-   if(argc!=2){
-      cout << "Numero incorreto de argumentos" << endl;
-      cout << " uso: ./LED_c comando" << endl;
-      cout << " onde comando pode ser: setup, on, off, status, ou close" << endl;
-      return 2;
-   }
    string cmd(argv[1]);
-   cout << "Iniciando o programa em C++ para alterar a gpio " << GPIO_NUMBER << endl;
-
+   int cont;
+   
    if(cmd=="on"){
       cout << "Acendendo o LED" << endl;
       writeGPIO(string(GPIO_PATH), "value", "1");
@@ -48,7 +42,10 @@ int main(int argc, char* argv[]){
       cout << "Habilitando a gpio" << endl;
       writeGPIO(string(GPIO_SYSFS), "export", GPIO_NUMBER);
       usleep(100000);
+      writeGPIO(string(GPIO_PATH), "value", "1");
+      usleep(100000);
       writeGPIO(string(GPIO_PATH), "direction", "out");
+      writeGPIO(string(GPIO_SYSFS), "unexport", GPIO_NUMBER);
    }
    else if (cmd=="close"){
       cout << "Desabilitando a gpio" << endl;
