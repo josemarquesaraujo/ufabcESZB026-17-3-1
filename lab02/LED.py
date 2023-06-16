@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+
 # script baseado no código disponibilizado em:
 # Derek Molloy, Exploring Raspberry Pi: Interfacing to the Real World with Embedded Linux,
 # Wiley 2016, ISBN 978-1-119-1868-1, http://www.exploringrpi.com/
