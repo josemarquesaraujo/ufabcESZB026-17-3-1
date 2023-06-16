@@ -20,15 +20,8 @@ fi
 
 if [ "$1" == "ligar" ]; then
 	for cont in 1 2 3 4 5; do
-		echo "Habilitando a GPIO numero $GPIO_AMARELO"
-		echo $GPIO_AMARELO >> "/sys/class/gpio/export"
-		sleep 1                        # esperar 1 segundo para garantir que a gpio foi exportada
-		echo "out" >> "/sys/class/gpio/gpio$GPIO_AMARELO/direction"
- 		echo 1 >> "/sys/class/gpio/gpio$GPIO_AMARELO/value"
-  		sleep 1
-   		echo 0 >> "/sys/class/gpio/gpio$GPIO_AMARELO/value"
 
-    		echo "Habilitando a GPIO numero $GPIO_VERMELHO"
+ 		echo "Habilitando a GPIO numero $GPIO_VERMELHO"
 		echo $GPIO_VERMELHO >> "/sys/class/gpio/export"
 		sleep 1                        # esperar 1 segundo para garantir que a gpio foi exportada
 		echo "out" >> "/sys/class/gpio/gpio$GPIO_VERMELHO/direction"
@@ -43,6 +36,16 @@ if [ "$1" == "ligar" ]; then
  		echo 1 >> "/sys/class/gpio/gpio$GPIO_VERDE/value"
   		sleep 1
    		echo 0 >> "/sys/class/gpio/gpio$GPIO_VERDE/value"
+     
+		echo "Habilitando a GPIO numero $GPIO_AMARELO"
+		echo $GPIO_AMARELO >> "/sys/class/gpio/export"
+		sleep 1                        # esperar 1 segundo para garantir que a gpio foi exportada
+		echo "out" >> "/sys/class/gpio/gpio$GPIO_AMARELO/direction"
+ 		echo 1 >> "/sys/class/gpio/gpio$GPIO_AMARELO/value"
+  		sleep 1
+   		echo 0 >> "/sys/class/gpio/gpio$GPIO_AMARELO/value"
+
+
 fi
 
 	
