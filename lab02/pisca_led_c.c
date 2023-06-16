@@ -25,46 +25,26 @@ void writeGPIO(char filename[], char value[]){
    fclose(fp);                         // fecha o arquivo
 }
 
-#int main(int argc, char* argv[]){
- #  if(argc!=2){                        // o nome do programa eh o argumento 1
+int main(int argc, char* argv[]){
+   int cont;
+   #  if(argc!=2){                        // o nome do programa eh o argumento 1
      # printf("Numero incorreto de argumentos\n");
      # printf(" uso: ./LED_c comando\n");
      # printf(" onde comando pode ser: setup, on, off, status, ou close\n");
      # return 2;                        // numero invalido de argumentos
-   }
-   printf("Iniciando o programa em C para alterar a gpio");
-   if(strcmp(argv[1],"setup")==0){
+   
+      printf("Iniciando o programa em C para alterar a gpio");
+    
       printf("Habilitando a gpio\n");
       writeGPIO(GPIO_SYSFS "export", GPIO_NUMBER);
       usleep(100000);                  // aguarda 100ms
       writeGPIO(GPIO4_PATH "direction", "out");
-   }
-   else if(strcmp(argv[1],"close")==0){
       printf("Desabilitando a gpio\n");
       writeGPIO(GPIO_SYSFS "unexport", GPIO_NUMBER);
-   }
-   else if(strcmp(argv[1],"on")==0){
-      printf("Acendendo o LED\n");
-      writeGPIO(GPIO4_PATH "value", "1");
-   }
-   else if (strcmp(argv[1],"off")==0){
-      printf("Desligando o LED\n");
-      writeGPIO(GPIO4_PATH "value", "0");
-   }
-   else if (strcmp(argv[1],"status")==0){
-      FILE* fp;                        // cria um ponteiro fp
-      char line[80], fullFilename[100];
-      sprintf(fullFilename, GPIO4_PATH "/value");
-      fp = fopen(fullFilename, "rt");  // abre o arquivo para leitura de texto
-      while (fgets(line, 80, fp) != NULL){
-         printf("O estado do LED eh %s", line);
-      }
-      fclose(fp);
-   }
-   else{
-      printf("Comando invalido!\n");
-   }
-   printf("Fim do programa em C.\n");
-   return 0;
 }
+   
+
+   
+   
+
 
