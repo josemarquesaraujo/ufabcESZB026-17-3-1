@@ -1,46 +1,42 @@
-#!/usr/bin/env python3
+#!/bin/bash
 
-import sys
-from time import sleep
+GPIO_AMARELO=16
+GPIO_VERMELHO=20
+GPIO_VERDE=21
 
-SYSFS_DIR = "/sys/class/gpio/"
+if [ $# -ne 1 ]; then
+    echo "Nenhum comando passado. Uso: ./LED.sh command,"
+    echo "onde comando pode ser: on"
+    echo "ex.: ./LED.sh on"
+    exit 2
+fi
 
-LED_PATH_AMARELO = "/sys/class/gpio/gpio16/"
-LED_PATH_VERMELHO = "/sys/class/gpio/gpio20/"
-LED_PATH_VERDE = "/sys/class/gpio/gpio21/"
+if [ "$1" == "on" ]; then
+    for cont in 1 2 3 4 5; do
+        echo "Habilitando a GPIO número $GPIO_VERMELHO"
+        echo $GPIO_VERMELHO > "/sys/class/gpio/export"
+        sleep 1
+        echo "out" > "/sys/class/gpio/gpio$GPIO_VERMELHO/direction"
+        echo 1 > "/sys/class/gpio/gpio$GPIO_VERMELHO/value"
+        sleep 2
+        echo 0 > "/sys/class/gpio/gpio$GPIO_VERMELHO/value"
 
-LED_NUMBER_AMARELO = "16"
-LED_NUMBER_VERMELHO = "20"
-LED_NUMBER_VERDE = "21"
+        echo "Habilitando a GPIO número $GPIO_VERDE"
+        echo $GPIO_VERDE > "/sys/class/gpio/export"
+        sleep 1
+        echo "out" > "/sys/class/gpio/gpio$GPIO_VERDE/direction"
+        echo 1 > "/sys/class/gpio/gpio$GPIO_VERDE/value"
+        sleep 1
+        echo 0 > "/sys/class/gpio/gpio$GPIO_VERDE/value"
 
-def writeLED(filename, value, path):
-    fo = open(path + filename, "w")
-    fo.write(value)
-    fo.close()
+        echo "Habilitando a GPIO número $GPIO_AMARELO"
+        echo $GPIO_AMARELO > "/sys/class/gpio/export"
+        sleep 1
+        echo "out" > "/sys/class/gpio/gpio$GPIO_AMARELO/direction"
+        echo 1 > "/sys/class/gpio/gpio$GPIO_AMARELO/value"
+        sleep 1
+        echo 0 > "/sys/class/gpio/gpio$GPIO_AMARELO/value"
+    done
+fi
 
-for cont in range(5):
-    writeLED(filename="export", value=LED_NUMBER_VERMELHO, path=SYSFS_DIR)
-    sleep(0.1)
-    writeLED(filename="direction", value="out", path=LED_PATH_VERMELHO)
-    writeLED(filename='value', value='1', path=LED_PATH_VERMELHO)
-    sleep(2)
-    writeLED(filename='value', value='0', path=LED_PATH_VERMELHO)
-    writeLED(filename="unexport", value=LED_NUMBER_VERMELHO, path=SYSFS_DIR)
-
-    writeLED(filename="export", value=LED_NUMBER_VERDE, path=SYSFS_DIR)
-    sleep(0.1)
-    writeLED(filename="direction", value="out", path=LED_PATH_VERDE)
-    writeLED(filename='value', value='1', path=LED_PATH_VERDE)
-    sleep(1)
-    writeLED(filename='value', value='0', path=LED_PATH_VERDE)
-    writeLED(filename="unexport", value=LED_NUMBER_VERDE, path=SYSFS_DIR)
-
-    writeLED(filename="export", value=LED_NUMBER_AMARELO, path=SYSFS_DIR)
-    sleep(0.1)
-    writeLED(filename="direction", value="out", path=LED_PATH_AMARELO)
-    writeLED(filename='value', value='1', path=LED_PATH_AMARELO)
-    sleep(1)
-    writeLED(filename='value', value='0', path=LED_PATH_AMARELO)
-    writeLED(filename="unexport", value=LED_NUMBER_AMARELO, path=SYSFS_DIR)
-
-print("Fim do script Python.")
+echo "Fim"
