@@ -8,17 +8,18 @@
 #include <string.h> /**inclui bibliotecas*/
 #include <unistd.h> // Added for usleep function
 
-#define GPIO_AMARELO "16" #define o pino 16 da gpio
-#define GPIO4_PATH_AMARELO "/sys/class/gpio/gpio16/" #define o caminho até o pino
+#define GPIO_AMARELO "16" /**define o pino 16 da gpio*/
+#define GPIO4_PATH_AMARELO "/sys/class/gpio/gpio16/" /**define o caminho até o pino*/
 
-#define GPIO_VERMELHO "20"#define o pino 20 da gpio
-#define GPIO4_PATH_VERMELHO "/sys/class/gpio/gpio20/"#define o caminho até o pino
+#define GPIO_VERMELHO "20"/**define o pino 20 da gpio*/
+#define GPIO4_PATH_VERMELHO "/sys/class/gpio/gpio20/"/**define o caminho até o pino*/
 
-#define GPIO_VERDE "21"#define o pino 21 da gpio
-#define GPIO4_PATH_VERDE "/sys/class/gpio/gpio21/"#define o caminho até o pino
+#define GPIO_VERDE "21"/**define o pino 21 da gpio*/
+#define GPIO4_PATH_VERDE "/sys/class/gpio/gpio21/"/**define o caminho até o pino*/
 
 #define GPIO_SYSFS "/sys/class/gpio/"
 
+/**função utilizada para escrever um valor específico em um arquivo de uma gpio*/
 void writeGPIO(char filename[], char value[]){
    FILE* fp;
    fp = fopen(filename, "w+");
