@@ -29,29 +29,33 @@ void writeGPIO(char filename[], char value[]){
 
 int main(int argc, char* argv[]){
    int cont;
-   
+   /**loop a ser executado 5 vezes*/
    for (cont = 0; cont < 5; cont++) {
       printf("Habilitando a gpio\n");
-      writeGPIO(GPIO_SYSFS "export", GPIO_VERMELHO);
-      usleep(100000);
-      writeGPIO(GPIO4_PATH_VERMELHO "direction", "out");
-      usleep(2000000);
+      writeGPIO(GPIO_SYSFS "export", GPIO_VERMELHO);/**exporta o gpio*/
+      usleep(100000);/**pausa para garantir importação*/
+      writeGPIO(GPIO4_PATH_VERMELHO "direction", "out");/**define o pino como saída*/
+      writeGPIO(GPIO4_PATH_VERMELHO "value", "1");/**define o valor para 1, acende o led*/
+      usleep(2000000);/**aguarda 2 segundos*/
+      writeGPIO(GPIO4_PATH "value", "0"); /**define o valor como 0, apaga o led*/
       printf("Desabilitando a gpio\n");
-      writeGPIO(GPIO_SYSFS "unexport", GPIO_VERMELHO);
+      writeGPIO(GPIO_SYSFS "unexport", GPIO_VERMELHO);/**desexporta a gpio*/
 
-      writeGPIO(GPIO_SYSFS "export", GPIO_VERDE);
-      usleep(100000);
-      writeGPIO(GPIO4_PATH_VERDE "direction", "out");
-      usleep(1000000);
-      printf("Desabilitando a gpio\n");
-      writeGPIO(GPIO_SYSFS "unexport", GPIO_VERDE);
+      writeGPIO(GPIO_SYSFS "export", GPIO_VERDE);/**exporta o gpio*/
+      usleep(100000);/**pausa para garantir importação*/
+      writeGPIO(GPIO4_PATH_VERDE "direction", "out");/**define o pino como saída*/
+      usleep(1000000);/**pausa de 1 segundo*/
+      writeGPIO(GPIO4_PATH "value", "0"); /**define o valor como 0, apaga o led*/
+      printf("Desabilitando a gpio\n");/***/
+      writeGPIO(GPIO_SYSFS "unexport", GPIO_VERDE);/**desexporta a gpio*/
 
-      writeGPIO(GPIO_SYSFS "export", GPIO_AMARELO);
-      usleep(100000);
-      writeGPIO(GPIO4_PATH_AMARELO "direction", "out");
-      usleep(1000000);
-      printf("Desabilitando a gpio\n");
-      writeGPIO(GPIO_SYSFS "unexport", GPIO_AMARELO);
+      writeGPIO(GPIO_SYSFS "export", GPIO_AMARELO);/**exporta o gpio*/
+      usleep(100000);/**pausa para garantir a importação*/
+      writeGPIO(GPIO4_PATH_AMARELO "direction", "out");/**define o pino como saída*/
+      usleep(1000000);/**pausa de 1 segundo*/
+      writeGPIO(GPIO4_PATH "value", "0"); /**define o valor como 0, apaga o led*/
+      printf("Desabilitando a gpio\n");/***/
+      writeGPIO(GPIO_SYSFS "unexport", GPIO_AMARELO);/**desexporta a gpio*/
    }
    
    return 0;
