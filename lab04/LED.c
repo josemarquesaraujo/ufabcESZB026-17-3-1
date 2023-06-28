@@ -5,7 +5,6 @@
 
 int main(){
 	int pino_PWM = 23;                         // pwm por software na GPIO23
-  int receive_num;
 	int brilho;
 	int range = 100;                           // periodo do PWM = 100us*range
 	wiringPiSetupGpio();                       // usar a numeracao GPIO, nao WPi
