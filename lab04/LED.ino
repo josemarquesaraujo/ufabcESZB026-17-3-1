@@ -8,5 +8,5 @@ void setup(){
 void loop(){
    int valor = analogRead(analogInPin);      // le valor no pino A0 usando conversor ADC de 10-bit
    Serial.println(valor);             // envia os valores pela porta serial
-   delay(1000);
+   delay(100);
 }
