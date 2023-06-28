@@ -27,7 +27,7 @@ int main(){
    unsigned char receive[100];         // cria um buffer para receber os dados
 	
   while (1) {
-    if ((count = read(file, (void*)receive, 100))<0){        // recebe os dados
+    if ((count = read(file, (void*)receive, 100))>0){        // recebe os dados
       perror("Falha ao ler da entrada\n");
       return -1;
    }
