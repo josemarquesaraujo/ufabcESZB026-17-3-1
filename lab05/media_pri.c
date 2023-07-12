@@ -17,21 +17,24 @@ int main() {                            // este programa deve ser rodado com 'su
 
    // Ajustando a frequencia do PWM em 10kHz com 128 passos de duty cycle
    // frequencia PWM = 19,2 MHz / (divisor * range)
-   // 10000 = 19200000 / (divisor * 128) => divisor = 15
+   // 261,6 = 19200000 / (divisor * 128) => divisor = 15
    pwmSetMode(PWM_MODE_MS);             // usando frequencia fixa
-   pwmSetRange(128);                    // passos do duty cycle (max=4096)
-   pwmSetClock(15);                     // fornece uma frequencia de 10kHz (max=4096)
+   pwmSetRange(3495);                    // passos do duty cycle (max=4096)
+   pwmSetClock(21);                     // fornece uma frequencia de 10kHz (max=4096)
    printf("Iniciando...\n");
-   for(ciclos = 0; ciclos < 4; ciclos++){  // variando o duty cycle
-      for(dc = 0; dc < 128; dc++){
-         pwmWrite(pino_PWM0, dc);
-         usleep(10000);
-      }
-      for(dc = 128; dc >= 0; dc--){
-         pwmWrite(pino_PWM0, dc);
-         usleep(10000);
-      }
+   for(ciclos = 0; ciclos < 3; ciclos++){  // variando o duty cycle
+    // for(dc = 0; dc < 128; dc++){
+        pwmWrite(pino_PWM0, 3494/2);	
+        usleep(250000);
+	pwmWrite(pino_PWM0, 0);
+	usleep(100000); 
+ //}
+      //for(dc = 128; dc >= 0; dc--){
+        // pwmWrite(pino_PWM0, dc);
+        // usleep(10000);
+     //}
    }
+
    printf("Fim.\n");
    return 0;                            // a saida PWM permanece ligada apos o termino do programa
 }
