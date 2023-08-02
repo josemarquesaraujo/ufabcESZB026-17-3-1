@@ -9,27 +9,27 @@ import serial
 import atexit
 import time
 
-global coletando
+global coleta
 
 coletando = 1
 
 def inicia_coleta():
-    global coletando
+    global coleta
     conexaoSerial.write(b'i')
-    coletando = 1
+    coleta = 1
 
 def para_coleta():
-    global coletando
+    global coleta
     conexaoSerial.write(b'p')
-    coletando = 0
+    coleta = 0
 
 def saindo():
     conexaoSerial.write(b'p')
     print('Saindo')
 
 def coleta_tempo():
-    global coletando
-    if coletando == 1:
+    global coleta
+    if coleta == 1:
        conexaoSerial.write(b'p')
        time.sleep(0.1)
        conexaoSerial.flushInput()
@@ -38,12 +38,12 @@ def coleta_tempo():
     conexaoSerial.write(b't')
     while conexaoSerial.inWaiting() < 2:
        pass
-    tempo1 = conexaoSerial.read()
-    tempo2 = conexaoSerial.read()
-    novotempo = float( (ord(tempo1) + ord(tempo2)*256.0))
+    t1 = conexaoSerial.read()
+    t2 = conexaoSerial.read()
+    nt = float( (ord(t1) + ord(t2)*256.0))
     print(novotempo)
-    texto2.setText("intervalo: " +str(novotempo) + "ms")
-    if coletando == 1:
+    t2.setText("intervalo: " +str(nt) + "ms")
+    if coleta == 1:
        conexaoSerial.write(b'i')
 def aumenta_delay():
     conexaoSerial.write(b'a')
@@ -66,7 +66,7 @@ def update():
         
         curve1.setData(data1, connect="finite")
         actualTime = time.time()*1000
-        taxa = str(round(actualTime-previousTime))
+        tx = str(round(actualTime-previousTime))
         previousTime = actualTime
         texto.setText("taxa: "+taxa.zfill(3)+"ms" )
 
