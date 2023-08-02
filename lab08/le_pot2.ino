@@ -3,7 +3,7 @@ int iniciaColeta = 0;
 char charRecebido;                   // cria uma variavel para armazenar o caractere recebido
 int coleta_tempo = 0;
 long tx;
-int atraso=100;
+int delay=100;
 unsigned long t1 = millis();
 void setup(){
    // Configura a serial: baud rate de 115200, 8-bit, sem paridade, 1 stop bit
@@ -25,10 +25,10 @@ void loop(){
              coleta_tempo = 1;
              break;
           case 'a':
-             atraso = atraso + 5;
+             delay = delay + 5;
              break;
           case 'd':
-             atraso = atraso - 5;
+             delay = delay - 5;
              break;
           default:                     // outro comando, ignora...
              break;
@@ -47,6 +47,6 @@ void loop(){
        Serial.write(tx >> 8);
        coleta_tempo = 0;
    }
-   delay(atraso);                          // aguarda 100ms
+   delay(delay);                          // aguarda 100ms
   
 }
