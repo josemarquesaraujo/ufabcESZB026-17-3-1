@@ -10,6 +10,7 @@ void setup(){
    Serial.begin(115200, SERIAL_8N1);
 }
 
+
 void loop(){
    if (Serial.available()){            // verifica se recebeu algum comando
       charRecebido = Serial.read();    // le o caractere recebido
