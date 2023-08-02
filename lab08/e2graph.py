@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
+
 import sys
 from pyqtgraph.Qt import QtGui, QtCore
 import pyqtgraph as pg
