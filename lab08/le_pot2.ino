@@ -2,9 +2,9 @@ const int analogInPin = A0;            // o potenciômetro esta ligado ao pino A
 int iniciaColeta = 0;
 char charRecebido;                   // cria uma variavel para armazenar o caractere recebido
 int coleta_tempo = 0;
-long taxa;
+long tx;
 int atraso=100;
-unsigned long tempo1 = millis();
+unsigned long t1 = millis();
 void setup(){
    // Configura a serial: baud rate de 115200, 8-bit, sem paridade, 1 stop bit
    Serial.begin(115200, SERIAL_8N1);
@@ -38,13 +38,13 @@ void loop(){
        int valor = analogRead(analogInPin); // le valor no pino A0 usando conversor ADC de 10-bit
        Serial.write(valor & 0xFF);          // envia byte menos significativo
        Serial.write(valor >> 8);            // envia byte mais significativo
-       unsigned long tempo2 = millis();
-       taxa = tempo2-tempo1;
-       tempo1 = tempo2;
+       unsigned long t2 = millis();
+       tx = t2-t1;
+       t1 = t2;
    }
    if (coleta_tempo == 1) {
-       Serial.write(taxa & 0xFF);
-       Serial.write(taxa >> 8);
+       Serial.write(tx & 0xFF);
+       Serial.write(tx >> 8);
        coleta_tempo = 0;
    }
    delay(atraso);                          // aguarda 100ms
