@@ -1,9 +1,9 @@
 const int analogInPin = A0;            // o potenciômetro esta ligado ao pino A0
 int iniciaColeta = 0;
 char charRecebido;                     // cria uma variavel para armazenar o caractere recebido
-int led2 = 2;
-int led3 = 3;
-int led4 = 4;
+int led2 = 2; // Led temperatura abaixo de 25 ºC
+int led3 = 3; // Led temperatura acima de 30 ºC
+int led4 = 4; //Led temperatura entre 25 ºC e 30 ºC
 
 void setup(){
    // Configura a serial: baud rate de 115200, 8-bit, sem paridade, 1 stop bit
@@ -35,6 +35,7 @@ void loop(){
        digitalWrite(led4, HIGH)
        digitalWrite(led3, LOW)
        digitalWrite(led2, LOW)
+
          else if (temp <= 25){
          digitalWrite(led4, LOW)
          digitalWrite(led2, HIGH)
