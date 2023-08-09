@@ -3,7 +3,6 @@ const int led2 = 2;
 const int led3 = 3;
 const int led4 = 4;
 const int analogInPin = A0;  
-const bool executarPrograma = true; // Altere para false se não quiser executar o programa
 
 // Frequências das notas musicais (C4 até B4)
 const float freqs[] = {261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88};
