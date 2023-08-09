@@ -1,4 +1,8 @@
 const int speakerPin = 9;
+const int led2 = 2;
+const int led3 = 3;
+const int led4 = 4;
+const int analogInPin = A0;  
 const bool executarPrograma = true; // Altere para false se não quiser executar o programa
 
 // Frequências das notas musicais (C4 até B4)
@@ -9,10 +13,19 @@ const int duracao[] = {400, 400, 400, 400, 400, 400, 400, 800, 400, 400, 400, 40
 
 void setup() {
   pinMode(speakerPin, OUTPUT);
+  pinMode(analogInPin, INPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(led4, OUTPUT);
 }
 
 void loop() {
-  if (executarPrograma) {
+  digitalWrite(led4, HIGH);
+  int valor = analogRead(analogInPin);
+  temp = (((valor*256.0)*5.0)/1023.0)/0.01;
+  if (temp >= 25) {
+    digitalWrite(led2, HIGH);
+    digitalWrite(led4, LOW);
     for (int i = 0; i < sizeof(freqs) / sizeof(freqs[0]); i++) {
       tone(speakerPin, freqs[i]);
       delay(duracao[i]);
