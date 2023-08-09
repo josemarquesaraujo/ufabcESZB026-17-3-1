@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-
 import sys
 from pyqtgraph.Qt import QtGui, QtCore
 import pyqtgraph as pg
@@ -10,47 +9,15 @@ import serial
 import atexit
 import time
 
-global coletando
-
-coletando = 1
-
 def inicia_coleta():
-    global coletando
     conexaoSerial.write(b'i')
-    coletando = 1
 
 def para_coleta():
-    global coletando
     conexaoSerial.write(b'p')
-    coletando = 0
 
 def saindo():
     conexaoSerial.write(b'p')
     print('Saindo')
-
-def coleta_tempo():
-    global coletando
-    if coletando == 1:
-       conexaoSerial.write(b'p')
-       time.sleep(0.1)
-       conexaoSerial.flushInput()
-       conexaoSerial.flushOutput()
-       time.sleep(0.1)
-    conexaoSerial.write(b't')
-    while conexaoSerial.inWaiting() < 2:
-       pass
-    tempo1 = conexaoSerial.read()
-    tempo2 = conexaoSerial.read()
-    novotempo = float( (ord(tempo1) + ord(tempo2)*256.0))
-    print(novotempo)
-    texto2.setText("intervalo: " +str(novotempo) + "ms")
-    if coletando == 1:
-       conexaoSerial.write(b'i')
-def aumenta_delay():
-    conexaoSerial.write(b'a')
-
-def diminui_delay():
-    conexaoSerial.write(b'd')
 
 def update():
     global data1, curve1, ptr1, conexaoSerial, x_atual, npontos, previousTime
@@ -87,10 +54,6 @@ texto = pg.TextItem(text="", color=(255,255,0), anchor=(0,1))
 p1.addItem(texto)
 texto.setPos(0,0) # adiciona o texto na posicao (0,0) do grafico
 
-texto2 = pg.TextItem(text="", color=(255,0,255), anchor=(1,1))
-p1.addItem(texto2)
-texto2.setPos(700,4)
-
 proxy1 = QtGui.QGraphicsProxyWidget()
 botao1 = QtGui.QPushButton('Inicia')
 proxy1.setWidget(botao1)
@@ -101,28 +64,9 @@ botao2 = QtGui.QPushButton('Para')
 proxy2.setWidget(botao2)
 botao2.clicked.connect(para_coleta)
 
-proxy3 = QtGui.QGraphicsProxyWidget()
-botao3 = QtGui.QPushButton('Tempo')
-proxy3.setWidget(botao3)
-botao3.clicked.connect(coleta_tempo)
-
-proxy4 = QtGui.QGraphicsProxyWidget()
-botao4 = QtGui.QPushButton('Aumenta')
-proxy4.setWidget(botao4)
-botao4.clicked.connect(aumenta_delay)
-
-proxy5 = QtGui.QGraphicsProxyWidget()
-botao5 = QtGui.QPushButton('Diminui')
-proxy5.setWidget(botao5)
-botao5.clicked.connect(diminui_delay)
-
-
 p2 = win.addLayout(row=1, col=0)
 p2.addItem(proxy1,row=0,col=0)
 p2.addItem(proxy2,row=1,col=0)
-p2.addItem(proxy3,row=2,col=0)
-p2.addItem(proxy4,row=3,col=0)
-p2.addItem(proxy5,row=3,col=1)
 
 conexaoSerial = serial.Serial('/dev/ttyACM0',115200)
 conexaoSerial.write(b'i')
