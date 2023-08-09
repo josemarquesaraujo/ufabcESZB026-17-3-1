@@ -14,7 +14,7 @@ const float freqs3[] = {100, 200, 250, 275, 300, 312.5, 325};
 const int duracao[] = {400, 400, 400, 400, 400, 400, 400, 800, 400, 400, 400, 400, 400, 400, 400, 800};
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(115200, SERIAL_8N1);
   pinMode(speakerPin, OUTPUT);
   pinMode(analogInPin, INPUT);
   pinMode(led2, OUTPUT);
