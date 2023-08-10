@@ -27,7 +27,24 @@ void setup() {
 void loop() {
   int valor = analogRead(analogInPin);
   temp = (((valor)*5.0)/1023.0)/0.01;
-  Serial.read(valor);
+  Serial.Write(valor);
+     if (Serial.available()){            // verifica se recebeu algum comando
+      charRecebido = Serial.read();    // le o caractere recebido
+      switch ( charRecebido ){
+          case 'i':                    // inicia coleta
+             iniciaColeta = 1;
+             break;
+             
+          case 'p':                    // para a coleta
+             iniciaColeta = 0;
+             break;
+             
+          default:                     // outro comando, ignora...
+             break;
+      }
+   }
+   if ( iniciaColeta == 1 ){
+       int valor = analogRead(analogInPin);
   if (temp < 24) {
     digitalWrite(led2, HIGH);
     digitalWrite(led3, LOW);
