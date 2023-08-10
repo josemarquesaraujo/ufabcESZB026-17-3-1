@@ -11,7 +11,9 @@ const float freqs2[] = {50, 75, 100, 125, 150, 175, 200};
 const float freqs3[] = {100, 200, 250, 275, 300, 312.5, 325};
 
 // Durações das notas (em milissegundos)
-const int duracao[] = {400, 400, 400, 400, 400, 400, 400, 800, 400, 400, 400, 400, 400, 400, 400, 800};
+const int duracao1[] = {400, 400, 400, 400, 400, 400, 400, 800, 400, 400, 400, 400, 400, 400, 400, 800};
+const int duracao2[] = {200, 200, 200, 200, 200, 200, 200, 400, 200, 200, 200, 200, 200, 200, 200, 400};
+const int duracao3[] = {800, 800, 800, 800, 800, 800, 800, 1200, 800, 800, 800, 800, 800, 800, 800, 1200};
 
 void setup() {
   Serial.begin(115200, SERIAL_8N1);
@@ -32,7 +34,7 @@ void loop() {
     digitalWrite(led4, LOW);
     for (int i = 0; i < sizeof(freqs1) / sizeof(freqs1[0]); i++) {
       tone(speakerPin, freqs1[i]);
-      delay(duracao[i]);
+      delay(duracao1[i]);
       noTone(speakerPin);
     }
   }
@@ -42,7 +44,7 @@ void loop() {
     digitalWrite(led3, LOW);
     for (int i = 0; i < sizeof(freqs2) / sizeof(freqs2[0]); i++) {
       tone(speakerPin, freqs2[i]);
-      delay(duracao[i]);
+      delay(duracao2[i]);
       noTone(speakerPin);
     }
   }
@@ -52,9 +54,9 @@ void loop() {
     digitalWrite(led3, HIGH);
     for (int i = 0; i < sizeof(freqs3) / sizeof(freqs3[0]); i++) {
       tone(speakerPin, freqs3[i]);
-      delay(duracao[i]);
+      delay(duracao3[i]);
       noTone(speakerPin);
     }
    }
-  delay(1000);
+  delay(2000);
 }
