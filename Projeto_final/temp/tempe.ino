@@ -25,9 +25,7 @@ void setup() {
 void loop() {
   int valor = analogRead(analogInPin);
   temp = (((valor)*5.0)/1023.0)/0.01;
-  Serial.print("Temperatura = ");
-  Serial.print(temp);
-  Serial.println("ºC");
+  Serial.read(valor);
   if (temp < 24) {
     digitalWrite(led2, HIGH);
     digitalWrite(led3, LOW);
@@ -36,7 +34,6 @@ void loop() {
       tone(speakerPin, freqs1[i]);
       delay(duracao[i]);
       noTone(speakerPin);
-      delay(50); // Pequeno atraso entre as notas
     }
   }
   else if (temp >= 24 && temp <= 26){
@@ -47,7 +44,6 @@ void loop() {
       tone(speakerPin, freqs2[i]);
       delay(duracao[i]);
       noTone(speakerPin);
-      delay(50); // Pequeno atraso entre as notas
     }
   }
    else if (temp > 26){
@@ -58,7 +54,6 @@ void loop() {
       tone(speakerPin, freqs3[i]);
       delay(duracao[i]);
       noTone(speakerPin);
-      delay(50); // Pequeno atraso entre as notas
     }
    }
   delay(1000);
