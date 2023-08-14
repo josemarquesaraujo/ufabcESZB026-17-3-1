@@ -7,7 +7,7 @@
 #include<unistd.h>
 #include<termios.h>   // biblioteca para comunicacao serial
 
-#define TAMANHO 100
+#define TAMANHO 10
 
 int main(){
    int file, count;
@@ -25,23 +25,27 @@ int main(){
    options.c_iflag = IGNPAR | ICRNL;   // ignora erros de paridade
    tcflush(file, TCIFLUSH);            // descarta informacao no arquivo
    tcsetattr(file, TCSANOW, &options); // aplica alteracoes imediatamente
-   unsigned char transmit[2] = "i\0";  // cria uma frase (\0 indica o final da mensagem)
-   for(int nn = 0; nn < TAMANHO; nn++){
-       if ((count = write(file, &transmit, 2))<0){             // transmite a frase
+   unsigned char lista_valores[TAMANHO];  // cria uma frase (\0 indica o final da mensagem)
+   //for(int nn = 0; nn < TAMANHO; nn++){
+       if ((count = write(file, "1", 1))<0){             // transmite a frase
           perror("Falha ao escrever na saida\n");
           return -1;
        }
        usleep(10000);                     // Espera 10ms pela resposta do Arduino
-       unsigned char receive[1];         // cria um buffer para receber os dados
-       if ((count = read(file, (void*)receive, 1))<0){        // recebe os dados
+       unsigned char receive[TAMANHO];         // cria um buffer para receber os dados
+       if ((count = read(file, (void*)receive, TAMANHO))<0){        // recebe os dados
           perror("Falha ao ler da entrada\n");
           return -1;
        }
-       if (count==0) printf("Nao houve resposta!\n");
-       else {
-         valores[nn] = receive[0];
-       }
+      print("Valores \t[%d]", receive[0])
+       for (int i = 1; i< TAMANHO; i++){
+         lista_valores[i] = receive[i];
+      }
+
+   FILE *fp_saida;
+   fp_saida = fopen ("/home/pi/ufabcESZB026-17-3-1/Projeto_final/Projeto.txt", "w");
+   for (int ii=0; ii<TAMANHO; ii++){
+      fprintf(fp_saida, "%f %d\n", ii/10.0, lista_valores[ii]);
    }
-   close(file);
-   return 0;
+   fclose(fp_saida);
 }
