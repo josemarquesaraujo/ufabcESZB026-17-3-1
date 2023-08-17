@@ -10,42 +10,57 @@
 #define TAMANHO 10
 
 int main(){
-   int file, count;
-   int valores[TAMANHO];
-   if ((file = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_NDELAY))<0){
-      perror("UART: Falha ao abrir o arquivo.\n");
-      return -1;
-   }
-   struct termios options;             // cria estruturas para configurar a comunicacao
-   tcgetattr(file, &options);          // ajusta os parametros do arquivo
+      int file, count;
+      int valores[TAMANHO];
+      if ((file = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_NDELAY))<0){
+            perror("UART: Falha ao abrir o arquivo.\n");
+            return -1;
+      }
+      struct termios options;             // cria estruturas para configurar a comunicacao
+      tcgetattr(file, &options);          // ajusta os parametros do arquivo
 
-   // Configura a comunicacao
-   // 115200 baud, 8-bit, enable receiver, no modem control lines
-   options.c_cflag = B115200 | CS8 | CREAD | CLOCAL;
-   options.c_iflag = IGNPAR | ICRNL;   // ignora erros de paridade
-   tcflush(file, TCIFLUSH);            // descarta informacao no arquivo
-   tcsetattr(file, TCSANOW, &options); // aplica alteracoes imediatamente
-   unsigned char lista_valores[TAMANHO];  // cria uma frase (\0 indica o final da mensagem)
-   //for(int nn = 0; nn < TAMANHO; nn++){
-       if ((count = write(file, "1", 1))<0){             // transmite a frase
-          perror("Falha ao escrever na saida\n");
-          return -1;
-       }
-       usleep(10000);                     // Espera 10ms pela resposta do Arduino
-       unsigned char receive[TAMANHO];         // cria um buffer para receber os dados
-       if ((count = read(file, (void*)receive, TAMANHO))<0){        // recebe os dados
-          perror("Falha ao ler da entrada\n");
-          return -1;
-       }
-      print("Valores \t[%d]", receive[0])
-       for (int i = 1; i< TAMANHO; i++){
-         lista_valores[i] = receive[i];
+      // Configura a comunicacao
+      // 115200 baud, 8-bit, enable receiver, no modem control lines
+      options.c_cflag = B115200 | CS8 | CREAD | CLOCAL;
+      options.c_iflag = IGNPAR | ICRNL;   // ignora erros de paridade
+      tcflush(file, TCIFLUSH);            // descarta informacao no arquivo
+      tcsetattr(file, TCSANOW, &options); // aplica alteracoes imediatamente
+      
+      //   INICIA COLETA
+      if ((count = write(file, "i", 1))<0){             // transmite a frase
+            perror("Falha ao escrever na saida\n");
+            return -1;
+      }
+      usleep(100000);                     // Espera 10ms pela resposta do Arduino
+      
+      // LE DADOS
+      unsigned char receive[2];         // cria um buffer para receber os dados
+      float lista_valores[TAMANHO];         // cria um buffer para receber os dados
+      for(int nn = 0; nn < TAMANHO; nn++){
+            if ((count = read(file, (void*)receive, 1))<0){        // recebe os dados
+                  perror("Falha ao ler da entrada\n");
+                  return -1;
+            }
+            lista_valores[nn] = ((receive[0])*5.0/1023.0)/0.01;
+            printf("Valores \t[%f]\t[%d]\t[%d]\n", lista_valores[nn],receive[0],receive[1]);
+            usleep(220000);
       }
 
-   FILE *fp_saida;
-   fp_saida = fopen ("/home/pi/ufabcESZB026-17-3-1/Projeto_final/Projeto.txt", "w");
-   for (int ii=0; ii<TAMANHO; ii++){
-      fprintf(fp_saida, "%f %d\n", ii/10.0, lista_valores[ii]);
-   }
-   fclose(fp_saida);
+      //   INTERROMPE COLETA
+      if ((count = write(file, "p", 1))<0){             // transmite a frase
+            perror("Falha ao escrever na saida\n");
+            return -1;
+      }
+      usleep(10000);                     // Espera 10ms pela resposta do Arduino
+
+      
+   
+      
+      // GRAVA VALORES
+      FILE *fp_saida;
+      fp_saida = fopen ("/home/pi/ufabcESZB026-17-3-1/Projeto_final/Projeto.txt", "w");
+      for (int ii=0; ii<TAMANHO; ii++){
+            fprintf(fp_saida, "%f %f\n", ii/10.0, lista_valores[ii]);
+      }
+      fclose(fp_saida);
 }
